@@ -55,6 +55,11 @@ class ToDoDetailTableViewController: UITableViewController {
         
         updateUserInterface()
     }
+    @objc func appActiveNotification() {
+        print("app came to foreground ")
+        updateReminderSwitch()
+    }
+    
     
     func updateUserInterface() {
         nameField.text = toDoItem.name
