@@ -25,27 +25,13 @@ class ToDoListViewController: UIViewController {
             self.tableView.reloadData()
         }
         
-        LocalNotificationManager.autherizeLocalNotifications()
+        LocalNotificationManager.autherizeLocalNotifications(viewController: self)
     }
-    func setNotifications() {
-        guard toDoItems.itemsArray.count > 0 else {
-            return
-        }
-        //remove all notifications
-        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-        
-        //recreateing updated notifications
-        for index in 0..<toDoItems.itemsArray.count{
-            if toDoItems.itemsArray[index].reminderSet {
-                let toDoItem = toDoItems.itemsArray[index]
-                toDoItems.itemsArray[index].notificationID = LocalNotificationManager.setCalendarNotification(title: toDoItem.name, subtitle: "", body: toDoItem.notes, badge: nil, sound: .default, date: toDoItem.date)
-                }
-        }
-    }
+
     
     func saveData() {
         toDoItems.saveData()
-setNotifications()
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
